@@ -1,13 +1,15 @@
 #!/usr/bin/env sh
 
+HAPROXY_VERSION=1.5
+
 cd build-15/
 
-docker build -t aguamala/haproxy-systemd:1.5-${BUILD_NUMBER} .
+docker build -t aguamala/haproxy-systemd:${HAPROXY_VERSION} .
 
-DESTINATION=aguamala/haproxy-systemd:1.5-${BUILD_NUMBER}
-LATEST_DESTINATION=aguamala/haproxy-systemd:1.5
+DESTINATION=aguamala/haproxy-systemd:${HAPROXY_VERSION}
+LATEST_DESTINATION=aguamala/haproxy-systemd:latest
 
-docker tag aguamala/centos:1.5-${BUILD_NUMBER} ${DESTINATION}
+docker tag aguamala/centos:${HAPROXY_VERSION} ${DESTINATION}
 docker push ${DESTINATION}
-docker tag -f aguamala/centos:1.5-${BUILD_NUMBER} ${LATEST_DESTINATION}
+docker tag -f aguamala/centos:${BUILD_NUMBER} ${LATEST_DESTINATION}
 docker push ${LATEST_DESTINATION}
